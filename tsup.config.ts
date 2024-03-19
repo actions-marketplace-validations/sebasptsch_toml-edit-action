@@ -8,6 +8,7 @@ export default defineConfig(({ watch }) => ({
     clean: true,
     bundle: true,
     sourcemap: true,
+    minify: !watch,
     onSuccess: watch
         ? "node --enable-source-maps dist/index.js --inspect"
         : undefined,
