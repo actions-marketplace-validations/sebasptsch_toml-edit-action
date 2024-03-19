@@ -81,7 +81,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          path: ../../test.toml
+          path: ./test.toml
           key: package.version
           value: 1.0.0
 
