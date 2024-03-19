@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.3.0
+
+### Minor Changes
+
+- ce75594: it works!
+
 ## 1.2.5
 
 ### Patch Changes
