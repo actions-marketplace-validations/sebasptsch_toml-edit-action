@@ -1,0 +1,19 @@
+name: 'Edit Toml'
+description: 'Edit a toml key val field'
+inputs:
+  path:
+    description: 'The path to the toml file'
+    required: true
+  key:
+    description: 'The key to edit'
+    required: true
+  value:
+    description: 'The value to set'
+    required: true
+result:
+  description: 'The result of the action'
+  value:
+    type: string
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
