@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.5
+
+### Patch Changes
+
+- 630dd49: forgot to build
+
 ## 1.2.4
 
 ### Patch Changes
