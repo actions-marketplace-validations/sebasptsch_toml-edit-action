@@ -11,7 +11,8 @@ inputs:
     description: 'The value to set'
     required: true
 outputs:
-  description: 'The result of the action'
+  result:
+    description: 'The result of the edit'
 runs:
   using: 'node20'
   main: 'dist/index.js'
