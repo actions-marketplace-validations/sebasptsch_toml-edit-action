@@ -1,6 +1,6 @@
 {
   "name": "toml-edit-action",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "scripts": {
     "dev": "pnpm build --watch",
