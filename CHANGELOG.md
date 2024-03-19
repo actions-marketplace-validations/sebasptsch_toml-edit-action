@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.1
+
+### Patch Changes
+
+- 99a12cc: use cjs build
+
 ## 1.2.0
 
 ### Minor Changes
