@@ -18749,7 +18749,7 @@ var require_core = __commonJS({
       process.env["PATH"] = `${inputPath}${path.delimiter}${process.env["PATH"]}`;
     }
     exports.addPath = addPath;
-    function getInput(name, options) {
+    function getInput2(name, options) {
       const val = process.env[`INPUT_${name.replace(/ /g, "_").toUpperCase()}`] || "";
       if (options && options.required && !val) {
         throw new Error(`Input required and not supplied: ${name}`);
@@ -18759,9 +18759,9 @@ var require_core = __commonJS({
       }
       return val.trim();
     }
-    exports.getInput = getInput;
+    exports.getInput = getInput2;
     function getMultilineInput(name, options) {
-      const inputs = getInput(name, options).split("\n").filter((x) => x !== "");
+      const inputs = getInput2(name, options).split("\n").filter((x) => x !== "");
       if (options && options.trimWhitespace === false) {
         return inputs;
       }
@@ -18771,7 +18771,7 @@ var require_core = __commonJS({
     function getBooleanInput(name, options) {
       const trueValue = ["true", "True", "TRUE"];
       const falseValue = ["false", "False", "FALSE"];
-      const val = getInput(name, options);
+      const val = getInput2(name, options);
       if (trueValue.includes(val))
         return true;
       if (falseValue.includes(val))
@@ -18780,7 +18780,7 @@ var require_core = __commonJS({
 Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
     }
     exports.getBooleanInput = getBooleanInput;
-    function setOutput(name, value) {
+    function setOutput2(name, value) {
       const filePath = process.env["GITHUB_OUTPUT"] || "";
       if (filePath) {
         return file_command_1.issueFileCommand("OUTPUT", file_command_1.prepareKeyValueMessage(name, value));
@@ -18788,16 +18788,16 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
       process.stdout.write(os.EOL);
       command_1.issueCommand("set-output", { name }, utils_1.toCommandValue(value));
     }
-    exports.setOutput = setOutput;
+    exports.setOutput = setOutput2;
     function setCommandEcho(enabled) {
       command_1.issue("echo", enabled ? "on" : "off");
     }
     exports.setCommandEcho = setCommandEcho;
-    function setFailed(message) {
+    function setFailed2(message) {
       process.exitCode = ExitCode.Failure;
       error(message);
     }
-    exports.setFailed = setFailed;
+    exports.setFailed = setFailed2;
     function isDebug() {
       return process.env["RUNNER_DEBUG"] === "1";
     }
@@ -18883,7 +18883,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 });
 
 // src/index.ts
-var import_core = __toESM(require_core());
+var core = __toESM(require_core());
 
 // node_modules/.pnpm/smol-toml@1.1.4/node_modules/smol-toml/dist/error.js
 function getLineColFromPtr(string, ptr) {
@@ -19709,16 +19709,16 @@ function stringify2(obj) {
 // src/index.ts
 import fs from "node:fs";
 try {
-  const path = import_core.default.getInput("path", {
+  const path = core.getInput("path", {
     required: true,
     trimWhitespace: true
   });
   const file = fs.readFileSync(path, "utf-8");
-  const key = import_core.default.getInput("key", {
+  const key = core.getInput("key", {
     required: true,
     trimWhitespace: true
   });
-  const value = import_core.default.getInput("value", {
+  const value = core.getInput("value", {
     required: true,
     trimWhitespace: true
   });
@@ -19732,14 +19732,14 @@ try {
     currentObject = currentObject[keys[i]];
   }
   currentObject[keys[keys.length - 1]] = value;
-  import_core.default.setOutput("result", stringify2(parsedToml));
+  core.setOutput("result", stringify2(parsedToml));
   fs.writeFileSync(path, stringify2(parsedToml));
-  import_core.default.setOutput("result", stringify2(parsedToml));
+  core.setOutput("result", stringify2(parsedToml));
 } catch (error) {
   if (error instanceof Error) {
-    import_core.default.setFailed(error.message);
+    core.setFailed(error.message);
   } else {
-    import_core.default.setFailed("Unknown error");
+    core.setFailed("Unknown error");
   }
 }
 /*! Bundled license information:
