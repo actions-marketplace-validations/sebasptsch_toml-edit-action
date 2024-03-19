@@ -10,10 +10,8 @@ inputs:
   value:
     description: 'The value to set'
     required: true
-result:
+outputs:
   description: 'The result of the action'
-  value:
-    type: string
 runs:
   using: 'node20'
   main: 'dist/index.js'
