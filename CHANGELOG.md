@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.3
+
+### Patch Changes
+
+- 152ec50: fix async execution
+
 ## 1.2.2
 
 ### Patch Changes
