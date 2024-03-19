@@ -1,17 +1,15 @@
 import core from "@actions/core";
 import * as toml from "smol-toml";
-import { promises as fs } from "node:fs";
+import fs from "node:fs";
 
-const bootstrap = async () => {
+try {
   const path = core.getInput("path", {
     required: true,
     trimWhitespace: true,
   });
 
   // Read the file
-  const file = await fs.readFile(path, "utf-8").catch((error) => {
-    throw new Error(`Failed to read the file: ${error.message}`);
-  });
+  const file = fs.readFileSync(path, "utf-8");
 
   const key = core.getInput("key", {
     required: true,
@@ -43,16 +41,10 @@ const bootstrap = async () => {
   core.setOutput("result", toml.stringify(parsedToml));
 
   // Write the file
-  await fs.writeFile(path, toml.stringify(parsedToml)).catch((error) => {
-    throw new Error(`Failed to write the file: ${error.message}`);
-  });
+  fs.writeFileSync(path, toml.stringify(parsedToml));
 
   // Set the output
   core.setOutput("result", toml.stringify(parsedToml));
-};
-
-try {
-  bootstrap();
 } catch (error) {
   if (error instanceof Error) {
     core.setFailed(error.message);
