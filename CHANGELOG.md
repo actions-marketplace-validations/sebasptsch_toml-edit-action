@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.4
+
+### Patch Changes
+
+- 4a49947: remove all await
+
 ## 1.2.3
 
 ### Patch Changes
