@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.2
+
+### Patch Changes
+
+- 5269e70: fix .cjs to .js
+
 ## 1.2.1
 
 ### Patch Changes
