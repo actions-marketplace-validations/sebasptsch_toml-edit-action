@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig(({ watch }) => ({
     entry: ["src/index.ts"],
     splitting: true,
-    format: ['esm'],
+    format: ['esm', 'cjs'],
     dts: false,
     clean: true,
     bundle: true,

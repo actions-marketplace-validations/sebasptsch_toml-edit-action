@@ -1,4 +1,4 @@
-"use strict"; function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } var _class;var __create = Object.create;
+var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -159,10 +159,10 @@ var require_command = __commonJS({
 });
 
 // node_modules/.pnpm/uuid@8.3.2/node_modules/uuid/dist/esm-node/rng.js
-var _crypto = require('crypto'); var _crypto2 = _interopRequireDefault(_crypto);
+import crypto from "crypto";
 function rng() {
   if (poolPtr > rnds8Pool.length - 16) {
-    _crypto2.default.randomFillSync(rnds8Pool);
+    crypto.randomFillSync(rnds8Pool);
     poolPtr = 0;
   }
   return rnds8Pool.slice(poolPtr, poolPtr += 16);
@@ -369,14 +369,14 @@ var init_v35 = __esm({
 });
 
 // node_modules/.pnpm/uuid@8.3.2/node_modules/uuid/dist/esm-node/md5.js
-
+import crypto2 from "crypto";
 function md5(bytes) {
   if (Array.isArray(bytes)) {
     bytes = Buffer.from(bytes);
   } else if (typeof bytes === "string") {
     bytes = Buffer.from(bytes, "utf8");
   }
-  return _crypto2.default.createHash("md5").update(bytes).digest();
+  return crypto2.createHash("md5").update(bytes).digest();
 }
 var md5_default;
 var init_md5 = __esm({
@@ -424,14 +424,14 @@ var init_v4 = __esm({
 });
 
 // node_modules/.pnpm/uuid@8.3.2/node_modules/uuid/dist/esm-node/sha1.js
-
+import crypto3 from "crypto";
 function sha1(bytes) {
   if (Array.isArray(bytes)) {
     bytes = Buffer.from(bytes);
   } else if (typeof bytes === "string") {
     bytes = Buffer.from(bytes, "utf8");
   }
-  return _crypto2.default.createHash("sha1").update(bytes).digest();
+  return crypto3.createHash("sha1").update(bytes).digest();
 }
 var sha1_default;
 var init_sha1 = __esm({
@@ -1632,8 +1632,8 @@ var require_timers = __commonJS({
 var require_sbmh = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/deps/streamsearch/sbmh.js"(exports, module) {
     "use strict";
-    var EventEmitter = __require("events").EventEmitter;
-    var inherits = __require("util").inherits;
+    var EventEmitter = __require("node:events").EventEmitter;
+    var inherits = __require("node:util").inherits;
     function SBMH(needle) {
       if (typeof needle === "string") {
         needle = Buffer.from(needle);
@@ -1769,8 +1769,8 @@ var require_sbmh = __commonJS({
 var require_PartStream = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/deps/dicer/lib/PartStream.js"(exports, module) {
     "use strict";
-    var inherits = __require("util").inherits;
-    var ReadableStream = __require("stream").Readable;
+    var inherits = __require("node:util").inherits;
+    var ReadableStream = __require("node:stream").Readable;
     function PartStream(opts) {
       ReadableStream.call(this, opts);
     }
@@ -1801,8 +1801,8 @@ var require_getLimit = __commonJS({
 var require_HeaderParser = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/deps/dicer/lib/HeaderParser.js"(exports, module) {
     "use strict";
-    var EventEmitter = __require("events").EventEmitter;
-    var inherits = __require("util").inherits;
+    var EventEmitter = __require("node:events").EventEmitter;
+    var inherits = __require("node:util").inherits;
     var getLimit = require_getLimit();
     var StreamSearch = require_sbmh();
     var B_DCRLF = Buffer.from("\r\n\r\n");
@@ -1901,8 +1901,8 @@ var require_HeaderParser = __commonJS({
 var require_Dicer = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/deps/dicer/lib/Dicer.js"(exports, module) {
     "use strict";
-    var WritableStream = __require("stream").Writable;
-    var inherits = __require("util").inherits;
+    var WritableStream = __require("node:stream").Writable;
+    var inherits = __require("node:util").inherits;
     var StreamSearch = require_sbmh();
     var PartStream = require_PartStream();
     var HeaderParser = require_HeaderParser();
@@ -2229,7 +2229,7 @@ var require_decodeText = __commonJS({
         if (textDecoders.has(exports.toString())) {
           try {
             return textDecoders.get(exports).decode(data);
-          } catch (e2) {
+          } catch {
           }
         }
         return typeof data === "string" ? data : data.toString();
@@ -2868,8 +2868,8 @@ var require_basename = __commonJS({
 var require_multipart = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/lib/types/multipart.js"(exports, module) {
     "use strict";
-    var { Readable } = __require("stream");
-    var { inherits } = __require("util");
+    var { Readable } = __require("node:stream");
+    var { inherits } = __require("node:util");
     var Dicer = require_Dicer();
     var parseParams = require_parseParams();
     var decodeText = require_decodeText();
@@ -3542,8 +3542,8 @@ var require_urlencoded = __commonJS({
 var require_main = __commonJS({
   "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/lib/main.js"(exports, module) {
     "use strict";
-    var WritableStream = __require("stream").Writable;
-    var { inherits } = __require("util");
+    var WritableStream = __require("node:stream").Writable;
+    var { inherits } = __require("node:util");
     var Dicer = require_Dicer();
     var MultipartParser = require_multipart();
     var UrlencodedParser = require_urlencoded();
@@ -3578,7 +3578,7 @@ var require_main = __commonJS({
     Busboy.prototype.emit = function(ev) {
       if (ev === "finish") {
         if (!this._done) {
-          _optionalChain([this, 'access', _2 => _2._parser, 'optionalAccess', _3 => _3.end, 'call', _4 => _4()]);
+          this._parser?.end();
           return;
         } else if (this._finished) {
           return;
@@ -3766,15 +3766,15 @@ var require_constants = __commonJS({
       ""
     ];
     var subresourceSet = new Set(subresource);
-    var DOMException2 = _nullishCoalesce(globalThis.DOMException, () => ( (() => {
+    var DOMException2 = globalThis.DOMException ?? (() => {
       try {
         atob("~");
       } catch (err) {
         return Object.getPrototypeOf(err).constructor;
       }
-    })()));
+    })();
     var channel;
-    var structuredClone = _nullishCoalesce(globalThis.structuredClone, () => ( // https://github.com/nodejs/node/blob/b27ae24dcc4251bad726d9d84baf678d1f707fed/lib/internal/structured_clone.js
+    var structuredClone = globalThis.structuredClone ?? // https://github.com/nodejs/node/blob/b27ae24dcc4251bad726d9d84baf678d1f707fed/lib/internal/structured_clone.js
     // structuredClone was added in v17.0.0, but fetch supports v16.8
     function structuredClone2(value, options = void 0) {
       if (arguments.length === 0) {
@@ -3785,9 +3785,9 @@ var require_constants = __commonJS({
       }
       channel.port1.unref();
       channel.port2.unref();
-      channel.port1.postMessage(value, _optionalChain([options, 'optionalAccess', _5 => _5.transfer]));
+      channel.port1.postMessage(value, options?.transfer);
       return receiveMessageOnPort(channel.port2).message;
-    }));
+    };
     module.exports = {
       DOMException: DOMException2,
       structuredClone,
@@ -3865,7 +3865,7 @@ var require_util2 = __commonJS({
     var crypto4;
     try {
       crypto4 = __require("crypto");
-    } catch (e3) {
+    } catch {
     }
     function responseURL(response) {
       const urlList = response.urlList;
@@ -3896,7 +3896,7 @@ var require_util2 = __commonJS({
       return "allowed";
     }
     function isErrorLike(object) {
-      return object instanceof Error || (_optionalChain([object, 'optionalAccess', _6 => _6.constructor, 'optionalAccess', _7 => _7.name]) === "Error" || _optionalChain([object, 'optionalAccess', _8 => _8.constructor, 'optionalAccess', _9 => _9.name]) === "DOMException");
+      return object instanceof Error || (object?.constructor?.name === "Error" || object?.constructor?.name === "DOMException");
     }
     function isValidReasonPhrase(statusText) {
       for (let i = 0; i < statusText.length; ++i) {
@@ -3958,7 +3958,7 @@ var require_util2 = __commonJS({
     }
     function setRequestReferrerPolicyOnRedirect(request, actualResponse) {
       const { headersList } = actualResponse;
-      const policyHeader = (_nullishCoalesce(headersList.get("referrer-policy"), () => ( ""))).split(",");
+      const policyHeader = (headersList.get("referrer-policy") ?? "").split(",");
       let policy = "";
       if (policyHeader.length > 0) {
         for (let i = policyHeader.length; i !== 0; i--) {
@@ -4022,10 +4022,10 @@ var require_util2 = __commonJS({
     }
     function createOpaqueTimingInfo(timingInfo) {
       return {
-        startTime: _nullishCoalesce(timingInfo.startTime, () => ( 0)),
+        startTime: timingInfo.startTime ?? 0,
         redirectStartTime: 0,
         redirectEndTime: 0,
-        postRedirectStartTime: _nullishCoalesce(timingInfo.startTime, () => ( 0)),
+        postRedirectStartTime: timingInfo.startTime ?? 0,
         finalServiceWorkerStartTime: 0,
         finalNetworkResponseStartTime: 0,
         finalNetworkRequestStartTime: 0,
@@ -4229,7 +4229,7 @@ var require_util2 = __commonJS({
     };
     Object.setPrototypeOf(normalizeMethodRecord, null);
     function normalizeMethod(method) {
-      return _nullishCoalesce(normalizeMethodRecord[method.toLowerCase()], () => ( method));
+      return normalizeMethodRecord[method.toLowerCase()] ?? method;
     }
     function serializeJavascriptValueToJSONString(value) {
       const result = JSON.stringify(value);
@@ -4458,10 +4458,10 @@ var require_webidl = __commonJS({
       });
     };
     webidl.brandCheck = function(V, I, opts = void 0) {
-      if (_optionalChain([opts, 'optionalAccess', _10 => _10.strict]) !== false && !(V instanceof I)) {
+      if (opts?.strict !== false && !(V instanceof I)) {
         throw new TypeError("Illegal invocation");
       } else {
-        return _optionalChain([V, 'optionalAccess', _11 => _11[Symbol.toStringTag]]) === I.prototype[Symbol.toStringTag];
+        return V?.[Symbol.toStringTag] === I.prototype[Symbol.toStringTag];
       }
     };
     webidl.argumentLengthCheck = function({ length }, min, ctx) {
@@ -4572,7 +4572,7 @@ var require_webidl = __commonJS({
             message: `Value of type ${webidl.util.Type(V)} is not an Object.`
           });
         }
-        const method = _optionalChain([V, 'optionalAccess', _12 => _12[Symbol.iterator], 'optionalCall', _13 => _13()]);
+        const method = V?.[Symbol.iterator]?.();
         const seq = [];
         if (method === void 0 || typeof method.next !== "function") {
           throw webidl.errors.exception({
@@ -4611,7 +4611,7 @@ var require_webidl = __commonJS({
         const keys = Reflect.ownKeys(O);
         for (const key of keys) {
           const desc = Reflect.getOwnPropertyDescriptor(O, key);
-          if (_optionalChain([desc, 'optionalAccess', _14 => _14.enumerable])) {
+          if (desc?.enumerable) {
             const typedKey = keyConverter(key);
             const typedValue = valueConverter(O[key]);
             result[typedKey] = typedValue;
@@ -4656,7 +4656,7 @@ var require_webidl = __commonJS({
           let value = dictionary[key];
           const hasDefault = hasOwn(options, "defaultValue");
           if (hasDefault && value !== null) {
-            value = _nullishCoalesce(value, () => ( defaultValue));
+            value = value ?? defaultValue;
           }
           if (required || hasDefault || value !== void 0) {
             value = converter(value);
@@ -5145,7 +5145,7 @@ var require_file = __commonJS({
       constructor(blobLike, fileName, options = {}) {
         const n = fileName;
         const t = options.type;
-        const d = _nullishCoalesce(options.lastModified, () => ( Date.now()));
+        const d = options.lastModified ?? Date.now();
         this[kState] = {
           blobLike,
           name: n,
@@ -5284,7 +5284,7 @@ var require_formdata = __commonJS({
     var { File: UndiciFile, FileLike, isFileLike } = require_file();
     var { webidl } = require_webidl();
     var { Blob: Blob2, File: NativeFile } = __require("buffer");
-    var File = _nullishCoalesce(NativeFile, () => ( UndiciFile));
+    var File = NativeFile ?? UndiciFile;
     var FormData = class _FormData {
       constructor(form) {
         if (form !== void 0) {
@@ -5457,7 +5457,7 @@ var require_body = __commonJS({
     var { File: UndiciFile } = require_file();
     var { parseMIMEType, serializeAMimeType } = require_dataURL();
     var ReadableStream = globalThis.ReadableStream;
-    var File = _nullishCoalesce(NativeFile, () => ( UndiciFile));
+    var File = NativeFile ?? UndiciFile;
     var textEncoder = new TextEncoder();
     var textDecoder = new TextDecoder();
     function extractBody(object, keepalive = false) {
@@ -5829,7 +5829,7 @@ var require_request = __commonJS({
       channels.headers = diagnosticsChannel.channel("undici:request:headers");
       channels.trailers = diagnosticsChannel.channel("undici:request:trailers");
       channels.error = diagnosticsChannel.channel("undici:request:error");
-    } catch (e4) {
+    } catch {
       channels.create = { hasSubscribers: false };
       channels.bodySent = { hasSubscribers: false };
       channels.headers = { hasSubscribers: false };
@@ -7124,7 +7124,7 @@ var require_client = __commonJS({
     var http2;
     try {
       http2 = __require("http2");
-    } catch (e5) {
+    } catch {
       http2 = { constants: {} };
     }
     var {
@@ -7148,7 +7148,7 @@ var require_client = __commonJS({
       channels.beforeConnect = diagnosticsChannel.channel("undici:client:beforeConnect");
       channels.connectError = diagnosticsChannel.channel("undici:client:connectError");
       channels.connected = diagnosticsChannel.channel("undici:client:connected");
-    } catch (e6) {
+    } catch {
       channels.sendHeaders = { hasSubscribers: false };
       channels.beforeConnect = { hasSubscribers: false };
       channels.connectError = { hasSubscribers: false };
@@ -11420,27 +11420,27 @@ var require_RetryHandler = __commonJS({
           errorCodes,
           retryAfter,
           statusCodes
-        } = _nullishCoalesce(retryOptions, () => ( {}));
+        } = retryOptions ?? {};
         this.dispatch = handlers.dispatch;
         this.handler = handlers.handler;
         this.opts = dispatchOpts;
         this.abort = null;
         this.aborted = false;
         this.retryOpts = {
-          retry: _nullishCoalesce(retryFn, () => ( _RetryHandler[kRetryHandlerDefaultRetry])),
-          retryAfter: _nullishCoalesce(retryAfter, () => ( true)),
-          maxTimeout: _nullishCoalesce(maxTimeout, () => ( 30 * 1e3)),
+          retry: retryFn ?? _RetryHandler[kRetryHandlerDefaultRetry],
+          retryAfter: retryAfter ?? true,
+          maxTimeout: maxTimeout ?? 30 * 1e3,
           // 30s,
-          timeout: _nullishCoalesce(minTimeout, () => ( 500)),
+          timeout: minTimeout ?? 500,
           // .5s
-          timeoutFactor: _nullishCoalesce(timeoutFactor, () => ( 2)),
-          maxRetries: _nullishCoalesce(maxRetries, () => ( 5)),
+          timeoutFactor: timeoutFactor ?? 2,
+          maxRetries: maxRetries ?? 5,
           // What errors we should retry
-          methods: _nullishCoalesce(methods, () => ( ["GET", "HEAD", "OPTIONS", "PUT", "DELETE", "TRACE"])),
+          methods: methods ?? ["GET", "HEAD", "OPTIONS", "PUT", "DELETE", "TRACE"],
           // Indicates which errors to retry
-          statusCodes: _nullishCoalesce(statusCodes, () => ( [500, 502, 503, 504, 429])),
+          statusCodes: statusCodes ?? [500, 502, 503, 504, 429],
           // List of errors to retry
-          errorCodes: _nullishCoalesce(errorCodes, () => ( [
+          errorCodes: errorCodes ?? [
             "ECONNRESET",
             "ECONNREFUSED",
             "ENOTFOUND",
@@ -11449,7 +11449,7 @@ var require_RetryHandler = __commonJS({
             "EHOSTDOWN",
             "EHOSTUNREACH",
             "EPIPE"
-          ]))
+          ]
         };
         this.retryCount = 0;
         this.start = 0;
@@ -11645,7 +11645,7 @@ var require_RetryHandler = __commonJS({
               ...this.opts,
               headers: {
                 ...this.opts.headers,
-                range: `bytes=${this.start}-${_nullishCoalesce(this.end, () => ( ""))}`
+                range: `bytes=${this.start}-${this.end ?? ""}`
               }
             };
           }
@@ -11799,10 +11799,10 @@ var require_headers = __commonJS({
       }
       return headers[kHeadersList].append(name, value);
     }
-    var HeadersList = (_class = class _HeadersList {
+    var HeadersList = class _HeadersList {
       /** @type {[string, string][]|null} */
-      __init2() {this.cookies = null}
-      constructor(init) {;_class.prototype.__init2.call(this);
+      cookies = null;
+      constructor(init) {
         if (init instanceof _HeadersList) {
           this[kHeadersMap] = new Map(init[kHeadersMap]);
           this[kHeadersSortedMap] = init[kHeadersSortedMap];
@@ -11878,7 +11878,7 @@ var require_headers = __commonJS({
         }
         return headers;
       }
-    }, _class);
+    };
     var Headers = class _Headers {
       constructor(init = void 0) {
         if (init === kConstruct) {
@@ -12229,7 +12229,7 @@ var require_response = __commonJS({
       get url() {
         webidl.brandCheck(this, _Response);
         const urlList = this[kState].urlList;
-        const url = _nullishCoalesce(urlList[urlList.length - 1], () => ( null));
+        const url = urlList[urlList.length - 1] ?? null;
         if (url === null) {
           return "";
         }
@@ -12460,7 +12460,7 @@ var require_response = __commonJS({
       if (V instanceof ReadableStream) {
         return webidl.converters.ReadableStream(V);
       }
-      if (_optionalChain([V, 'optionalAccess', _15 => _15[Symbol.asyncIterator]])) {
+      if (V?.[Symbol.asyncIterator]) {
         return V;
       }
       return webidl.converters.XMLHttpRequestBodyInit(V);
@@ -12543,7 +12543,7 @@ var require_request2 = __commonJS({
           settingsObject: {
             baseUrl: getGlobalOrigin(),
             get origin() {
-              return _optionalChain([this, 'access', _16 => _16.baseUrl, 'optionalAccess', _17 => _17.origin]);
+              return this.baseUrl?.origin;
             },
             policyContainer: makePolicyContainer()
           }
@@ -12573,7 +12573,7 @@ var require_request2 = __commonJS({
         }
         const origin = this[kRealm].settingsObject.origin;
         let window = "client";
-        if (_optionalChain([request, 'access', _18 => _18.window, 'optionalAccess', _19 => _19.constructor, 'optionalAccess', _20 => _20.name]) === "EnvironmentSettingsObject" && sameOrigin(request.window, origin)) {
+        if (request.window?.constructor?.name === "EnvironmentSettingsObject" && sameOrigin(request.window, origin)) {
           window = request.window;
         }
         if (init.window != null) {
@@ -12702,7 +12702,7 @@ var require_request2 = __commonJS({
           if (forbiddenMethodsSet.has(method.toUpperCase())) {
             throw new TypeError(`'${method}' HTTP method is unsupported.`);
           }
-          method = _nullishCoalesce(normalizeMethodRecord[method], () => ( normalizeMethod(method)));
+          method = normalizeMethodRecord[method] ?? normalizeMethod(method);
           request.method = method;
         }
         if (init.signal !== void 0) {
@@ -12735,7 +12735,7 @@ var require_request2 = __commonJS({
               } else if (getEventListeners(signal, "abort").length >= defaultMaxListeners) {
                 setMaxListeners(100, signal);
               }
-            } catch (e7) {
+            } catch {
             }
             util.addAbortListener(signal, abort);
             requestFinalizer.register(ac, { signal, abort });
@@ -12781,7 +12781,7 @@ var require_request2 = __commonJS({
             this[kHeaders].append("content-type", contentType);
           }
         }
-        const inputOrInitBody = _nullishCoalesce(initBody, () => ( inputBody));
+        const inputOrInitBody = initBody ?? inputBody;
         if (inputOrInitBody != null && inputOrInitBody.source == null) {
           if (initBody != null && init.duplex == null) {
             throw new TypeError("RequestInit: duplex option is required when sending a body.");
@@ -12933,7 +12933,7 @@ var require_request2 = __commonJS({
       // Returns a clone of request.
       clone() {
         webidl.brandCheck(this, _Request);
-        if (this.bodyUsed || _optionalChain([this, 'access', _21 => _21.body, 'optionalAccess', _22 => _22.locked])) {
+        if (this.bodyUsed || this.body?.locked) {
           throw new TypeError("unusable");
         }
         const clonedRequest = cloneRequest(this[kState]);
@@ -13212,7 +13212,7 @@ var require_fetch = __commonJS({
           return;
         }
         this.state = "terminated";
-        _optionalChain([this, 'access', _23 => _23.connection, 'optionalAccess', _24 => _24.destroy, 'call', _25 => _25(reason)]);
+        this.connection?.destroy(reason);
         this.emit("terminated", reason);
       }
       // https://fetch.spec.whatwg.org/#fetch-controller-abort
@@ -13225,7 +13225,7 @@ var require_fetch = __commonJS({
           error = new DOMException2("The operation was aborted.", "AbortError");
         }
         this.serializedAbortReason = error;
-        _optionalChain([this, 'access', _26 => _26.connection, 'optionalAccess', _27 => _27.destroy, 'call', _28 => _28(error)]);
+        this.connection?.destroy(error);
         this.emit("terminated", error);
       }
     };
@@ -13245,7 +13245,7 @@ var require_fetch = __commonJS({
         return p.promise;
       }
       const globalObject = request.client.globalObject;
-      if (_optionalChain([globalObject, 'optionalAccess', _29 => _29.constructor, 'optionalAccess', _30 => _30.name]) === "ServiceWorkerGlobalScope") {
+      if (globalObject?.constructor?.name === "ServiceWorkerGlobalScope") {
         request.serviceWorkers = "none";
       }
       let responseObject = null;
@@ -13288,7 +13288,7 @@ var require_fetch = __commonJS({
         request,
         processResponseEndOfBody: handleFetchDone,
         processResponse,
-        dispatcher: _nullishCoalesce(init.dispatcher, () => ( getGlobalDispatcher()))
+        dispatcher: init.dispatcher ?? getGlobalDispatcher()
         // undici
       });
       return p.promise;
@@ -13297,7 +13297,7 @@ var require_fetch = __commonJS({
       if (response.type === "error" && response.aborted) {
         return;
       }
-      if (!_optionalChain([response, 'access', _31 => _31.urlList, 'optionalAccess', _32 => _32.length])) {
+      if (!response.urlList?.length) {
         return;
       }
       const originalURL = response.urlList[0];
@@ -13335,7 +13335,7 @@ var require_fetch = __commonJS({
         error = new DOMException2("The operation was aborted.", "AbortError");
       }
       p.reject(error);
-      if (request.body != null && isReadable(_optionalChain([request, 'access', _33 => _33.body, 'optionalAccess', _34 => _34.stream]))) {
+      if (request.body != null && isReadable(request.body?.stream)) {
         request.body.stream.cancel(error).catch((err) => {
           if (err.code === "ERR_INVALID_STATE") {
             return;
@@ -13347,7 +13347,7 @@ var require_fetch = __commonJS({
         return;
       }
       const response = responseObject[kState];
-      if (response.body != null && isReadable(_optionalChain([response, 'access', _35 => _35.body, 'optionalAccess', _36 => _36.stream]))) {
+      if (response.body != null && isReadable(response.body?.stream)) {
         response.body.stream.cancel(error).catch((err) => {
           if (err.code === "ERR_INVALID_STATE") {
             return;
@@ -13391,10 +13391,10 @@ var require_fetch = __commonJS({
       };
       assert(!request.body || request.body.stream);
       if (request.window === "client") {
-        request.window = _optionalChain([request, 'access', _37 => _37.client, 'optionalAccess', _38 => _38.globalObject, 'optionalAccess', _39 => _39.constructor, 'optionalAccess', _40 => _40.name]) === "Window" ? request.client : "no-window";
+        request.window = request.client?.globalObject?.constructor?.name === "Window" ? request.client : "no-window";
       }
       if (request.origin === "client") {
-        request.origin = _optionalChain([request, 'access', _41 => _41.client, 'optionalAccess', _42 => _42.origin]);
+        request.origin = request.client?.origin;
       }
       if (request.policyContainer === "client") {
         if (request.client != null) {
@@ -13543,7 +13543,7 @@ var require_fetch = __commonJS({
           const bodyWithType = safelyExtractBody(blobURLEntryObject);
           const body = bodyWithType[0];
           const length = isomorphicEncode(`${body.length}`);
-          const type = _nullishCoalesce(bodyWithType[1], () => ( ""));
+          const type = bodyWithType[1] ?? "";
           const response = makeResponse({
             statusText: "OK",
             headersList: [
@@ -13867,7 +13867,7 @@ var require_fetch = __commonJS({
         destroy(err) {
           if (!this.destroyed) {
             this.destroyed = true;
-            _optionalChain([this, 'access', _43 => _43.abort, 'optionalCall', _44 => _44(_nullishCoalesce(err, () => ( new DOMException2("The operation was aborted.", "AbortError"))))]);
+            this.abort?.(err ?? new DOMException2("The operation was aborted.", "AbortError"));
           }
         }
       };
@@ -13891,7 +13891,7 @@ var require_fetch = __commonJS({
             return;
           }
           yield bytes;
-          _optionalChain([fetchParams, 'access', _45 => _45.processRequestBodyChunkLength, 'optionalCall', _46 => _46(bytes.byteLength)]);
+          fetchParams.processRequestBodyChunkLength?.(bytes.byteLength);
         };
         const processEndOfBody = () => {
           if (isCancelled(fetchParams)) {
@@ -13991,7 +13991,7 @@ var require_fetch = __commonJS({
             finalizeResponse(fetchParams, response);
             return;
           }
-          timingInfo.decodedBodySize += _nullishCoalesce(_optionalChain([bytes, 'optionalAccess', _47 => _47.byteLength]), () => ( 0));
+          timingInfo.decodedBodySize += bytes?.byteLength ?? 0;
           if (isFailure) {
             fetchParams.controller.terminate(bytes);
             return;
@@ -14132,7 +14132,7 @@ var require_fetch = __commonJS({
               if (this.abort) {
                 fetchParams.controller.off("terminated", this.abort);
               }
-              _optionalChain([this, 'access', _48 => _48.body, 'optionalAccess', _49 => _49.destroy, 'call', _50 => _50(error)]);
+              this.body?.destroy(error);
               fetchParams.controller.terminate(error);
               reject(error);
             },
@@ -14191,7 +14191,7 @@ var require_progressevent = __commonJS({
     var ProgressEvent = class _ProgressEvent extends Event {
       constructor(type, eventInitDict = {}) {
         type = webidl.converters.DOMString(type);
-        eventInitDict = webidl.converters.ProgressEventInit(_nullishCoalesce(eventInitDict, () => ( {})));
+        eventInitDict = webidl.converters.ProgressEventInit(eventInitDict ?? {});
         super(type, eventInitDict);
         this[kState] = {
           lengthComputable: eventInitDict.lengthComputable,
@@ -15092,7 +15092,7 @@ var require_cache = __commonJS({
         }
         const responseList = [];
         for (const response of responses) {
-          const responseObject = new Response(_nullishCoalesce(_optionalChain([response, 'access', _51 => _51.body, 'optionalAccess', _52 => _52.source]), () => ( null)));
+          const responseObject = new Response(response.body?.source ?? null);
           const body = responseObject[kState].body;
           responseObject[kState] = response;
           responseObject[kState].body = body;
@@ -15320,7 +15320,7 @@ var require_cache = __commonJS({
         }
         queueMicrotask(() => {
           if (errorData === null) {
-            cacheJobPromise.resolve(!!_optionalChain([requestResponses, 'optionalAccess', _53 => _53.length]));
+            cacheJobPromise.resolve(!!requestResponses?.length);
           } else {
             cacheJobPromise.reject(errorData);
           }
@@ -15466,7 +15466,7 @@ var require_cache = __commonJS({
        */
       #queryCache(requestQuery, options, targetStorage) {
         const resultList = [];
-        const storage = _nullishCoalesce(targetStorage, () => ( this.#relevantRequestResponseList));
+        const storage = targetStorage ?? this.#relevantRequestResponseList;
         for (const requestResponse of storage) {
           const [cachedRequest, cachedResponse] = requestResponse;
           if (this.#requestMatchesCachedItem(requestQuery, cachedRequest, cachedResponse, options)) {
@@ -15486,14 +15486,14 @@ var require_cache = __commonJS({
       #requestMatchesCachedItem(requestQuery, request, response = null, options) {
         const queryURL = new URL(requestQuery.url);
         const cachedURL = new URL(request.url);
-        if (_optionalChain([options, 'optionalAccess', _54 => _54.ignoreSearch])) {
+        if (options?.ignoreSearch) {
           cachedURL.search = "";
           queryURL.search = "";
         }
         if (!urlEquals(queryURL, cachedURL, true)) {
           return false;
         }
-        if (response == null || _optionalChain([options, 'optionalAccess', _55 => _55.ignoreVary]) || !response.headersList.contains("vary")) {
+        if (response == null || options?.ignoreVary || !response.headersList.contains("vary")) {
           return true;
         }
         const fieldValues = getFieldValues(response.headersList.get("vary"));
@@ -16246,7 +16246,7 @@ var require_events = __commonJS({
         webidl.argumentLengthCheck(arguments, 1, { header: "ErrorEvent constructor" });
         super(type, eventInitDict);
         type = webidl.converters.DOMString(type);
-        eventInitDict = webidl.converters.ErrorEventInit(_nullishCoalesce(eventInitDict, () => ( {})));
+        eventInitDict = webidl.converters.ErrorEventInit(eventInitDict ?? {});
         this.#eventInit = eventInitDict;
       }
       get message() {
@@ -16436,7 +16436,7 @@ var require_util7 = __commonJS({
       if (type === opcodes.TEXT) {
         try {
           dataForEvent = new TextDecoder("utf-8", { fatal: true }).decode(data);
-        } catch (e8) {
+        } catch {
           failWebsocketConnection(ws, "Received invalid UTF-8 in text frame.");
           return;
         }
@@ -16476,7 +16476,7 @@ var require_util7 = __commonJS({
     function failWebsocketConnection(ws, reason) {
       const { [kController]: controller, [kResponse]: response } = ws;
       controller.abort();
-      if (_optionalChain([response, 'optionalAccess', _56 => _56.socket]) && !response.socket.destroyed) {
+      if (response?.socket && !response.socket.destroyed) {
         response.socket.destroy();
       }
       if (reason) {
@@ -16524,7 +16524,7 @@ var require_connection = __commonJS({
     var crypto4;
     try {
       crypto4 = __require("crypto");
-    } catch (e9) {
+    } catch {
     }
     function establishWebSocketConnection(url, protocols, ws, onEstablish, options) {
       const requestURL = url;
@@ -16552,7 +16552,7 @@ var require_connection = __commonJS({
       const controller = fetching({
         request,
         useParallelQueue: true,
-        dispatcher: _nullishCoalesce(options.dispatcher, () => ( getGlobalDispatcher())),
+        dispatcher: options.dispatcher ?? getGlobalDispatcher(),
         processResponse(response) {
           if (response.type === "error" || response.status !== 101) {
             failWebsocketConnection(ws, "Received network error or non-101 status code.");
@@ -16562,11 +16562,11 @@ var require_connection = __commonJS({
             failWebsocketConnection(ws, "Server did not respond with sent protocols.");
             return;
           }
-          if (_optionalChain([response, 'access', _57 => _57.headersList, 'access', _58 => _58.get, 'call', _59 => _59("Upgrade"), 'optionalAccess', _60 => _60.toLowerCase, 'call', _61 => _61()]) !== "websocket") {
+          if (response.headersList.get("Upgrade")?.toLowerCase() !== "websocket") {
             failWebsocketConnection(ws, 'Server did not set Upgrade header to "websocket".');
             return;
           }
-          if (_optionalChain([response, 'access', _62 => _62.headersList, 'access', _63 => _63.get, 'call', _64 => _64("Connection"), 'optionalAccess', _65 => _65.toLowerCase, 'call', _66 => _66()]) !== "upgrade") {
+          if (response.headersList.get("Connection")?.toLowerCase() !== "upgrade") {
             failWebsocketConnection(ws, 'Server did not set Connection header to "upgrade".');
             return;
           }
@@ -16613,7 +16613,7 @@ var require_connection = __commonJS({
       let reason = "";
       const result = ws[kByteParser].closingInfo;
       if (result) {
-        code = _nullishCoalesce(result.code, () => ( 1005));
+        code = result.code ?? 1005;
         reason = result.reason;
       } else if (!ws[kSentClose]) {
         code = 1006;
@@ -16654,7 +16654,7 @@ var require_frame = __commonJS({
     var crypto4;
     try {
       crypto4 = __require("crypto");
-    } catch (e10) {
+    } catch {
     }
     var WebsocketFrameSend = class {
       /**
@@ -16665,7 +16665,7 @@ var require_frame = __commonJS({
         this.maskKey = crypto4.randomBytes(4);
       }
       createFrame(opcode) {
-        const bodyLength = _nullishCoalesce(_optionalChain([this, 'access', _67 => _67.frameData, 'optionalAccess', _68 => _68.byteLength]), () => ( 0));
+        const bodyLength = this.frameData?.byteLength ?? 0;
         let payloadLength = bodyLength;
         let offset = 6;
         if (bodyLength > maxUnsigned16Bit) {
@@ -16924,7 +16924,7 @@ var require_receiver = __commonJS({
         }
         try {
           reason = new TextDecoder("utf-8", { fatal: true }).decode(reason);
-        } catch (e11) {
+        } catch {
           return null;
         }
         return { code, reason };
@@ -17372,7 +17372,7 @@ var require_undici = __commonJS({
     try {
       __require("crypto");
       hasCrypto = true;
-    } catch (e12) {
+    } catch {
       hasCrypto = false;
     }
     Object.assign(Dispatcher.prototype, api);
@@ -18910,9 +18910,9 @@ function makeCodeBlock(string, line, column) {
   return codeblock;
 }
 var TomlError = class extends Error {
-  
-  
-  
+  line;
+  column;
+  codeblock;
   constructor(message, options) {
     const [line, column] = getLineColFromPtr(options.toml, options.ptr);
     const codeblock = makeCodeBlock(options.toml, line, column);
@@ -19141,7 +19141,7 @@ function parseString(str, ptr = 0, endPtr = str.length) {
         }
         try {
           parsed += String.fromCodePoint(parseInt(code, 16));
-        } catch (e13) {
+        } catch {
           throw new TomlError("invalid unicode escape", {
             toml: str,
             ptr: tmp
@@ -19474,7 +19474,7 @@ function peekTable(key, table, meta, type) {
       }
     }
     k = key[i];
-    if ((hasOwn = Object.hasOwn(t, k)) && _optionalChain([m, 'access', _69 => _69[k], 'optionalAccess', _70 => _70.t]) === 0 && _optionalChain([m, 'access', _71 => _71[k], 'optionalAccess', _72 => _72.d])) {
+    if ((hasOwn = Object.hasOwn(t, k)) && m[k]?.t === 0 && m[k]?.d) {
       return null;
     }
     if (!hasOwn) {
@@ -19707,13 +19707,13 @@ function stringify2(obj) {
 }
 
 // src/index.ts
-var _fs = require('fs');
+import { promises as fs } from "node:fs";
 try {
   const path = import_core.default.getInput("path", {
     required: true,
     trimWhitespace: true
   });
-  const file = await _fs.promises.readFile(path, "utf-8").catch((error) => {
+  const file = await fs.readFile(path, "utf-8").catch((error) => {
     throw new Error(`Failed to read the file: ${error.message}`);
   });
   const key = import_core.default.getInput("key", {
@@ -19735,7 +19735,7 @@ try {
   }
   currentObject[keys[keys.length - 1]] = value;
   import_core.default.setOutput("result", stringify2(parsedToml));
-  await _fs.promises.writeFile(path, stringify2(parsedToml)).catch((error) => {
+  await fs.writeFile(path, stringify2(parsedToml)).catch((error) => {
     throw new Error(`Failed to write the file: ${error.message}`);
   });
   import_core.default.setOutput("result", stringify2(parsedToml));
