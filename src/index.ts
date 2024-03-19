@@ -1,6 +1,5 @@
 import core from "@actions/core"
-import github from "@actions/github"
-import toml, { TomlPrimitive } from 'smol-toml'
+import * as toml from 'smol-toml'
 import { promises as fs } from "node:fs"
 
 try {
@@ -31,7 +30,7 @@ try {
     // If the key is a string, we can just set it directly
     // split the key by '.' and iterate through the keys to set the value
     
-        let keys = key.split('.')
+        const keys = key.split('.')
         let currentObject = parsedToml as Record<string, toml.TomlPrimitive>
         for (let i = 0; i < keys.length - 1; i++) {
             if (currentObject[keys[i]] === undefined) {
