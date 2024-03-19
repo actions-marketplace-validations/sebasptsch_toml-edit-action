@@ -19707,15 +19707,13 @@ function stringify2(obj) {
 }
 
 // src/index.ts
-var _fs = require('fs');
+var _fs = require('fs'); var _fs2 = _interopRequireDefault(_fs);
 try {
   const path = import_core.default.getInput("path", {
     required: true,
     trimWhitespace: true
   });
-  const file = await _fs.promises.readFile(path, "utf-8").catch((error) => {
-    throw new Error(`Failed to read the file: ${error.message}`);
-  });
+  const file = _fs2.default.readFileSync(path, "utf-8");
   const key = import_core.default.getInput("key", {
     required: true,
     trimWhitespace: true
@@ -19735,9 +19733,7 @@ try {
   }
   currentObject[keys[keys.length - 1]] = value;
   import_core.default.setOutput("result", stringify2(parsedToml));
-  await _fs.promises.writeFile(path, stringify2(parsedToml)).catch((error) => {
-    throw new Error(`Failed to write the file: ${error.message}`);
-  });
+  _fs2.default.writeFileSync(path, stringify2(parsedToml));
   import_core.default.setOutput("result", stringify2(parsedToml));
 } catch (error) {
   if (error instanceof Error) {
