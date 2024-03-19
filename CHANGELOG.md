@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.2.0
+
+### Minor Changes
+
+- 8a54604: fix bundling settings
+
 ## 1.1.3
 
 ### Patch Changes
