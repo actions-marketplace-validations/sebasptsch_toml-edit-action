@@ -1,3 +1,2 @@
-// src/index.ts
-console.log("Hello, world!");
+import t from"@actions/core";import a from"smol-toml";import{promises as l}from"node:fs";try{let i=t.getInput("path",{required:!0,trimWhitespace:!0}),m=await l.readFile(i,"utf-8").catch(e=>{throw new Error(`Failed to read the file: ${e.message}`)}),n=t.getInput("key",{required:!0,trimWhitespace:!0}),u=t.getInput("value",{required:!0,trimWhitespace:!0}),o=a.parse(m),r=n.split("."),s=o;for(let e=0;e<r.length-1;e++)s[r[e]]===void 0&&(s[r[e]]={}),s=s[r[e]];s[r[r.length-1]]=u,t.setOutput("result",a.stringify(o)),await l.writeFile(i,a.stringify(o)).catch(e=>{throw new Error(`Failed to write the file: ${e.message}`)}),t.setOutput("result",a.stringify(o))}catch(i){i instanceof Error?t.setFailed(i.message):t.setFailed("Unknown error")}
 //# sourceMappingURL=index.js.map
