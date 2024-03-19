@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.1.2
+
+### Patch Changes
+
+- da22d0d: icon and color
+
 ## 1.1.1
 
 ### Patch Changes
