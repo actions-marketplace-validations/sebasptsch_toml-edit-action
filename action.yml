@@ -17,3 +17,5 @@ result:
 runs:
   using: 'node20'
   main: 'dist/index.js'
+icon: align-left
+color: gray-dark
