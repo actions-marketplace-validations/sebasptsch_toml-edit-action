@@ -1,5 +1,11 @@
 # toml-edit-action
 
+## 1.1.3
+
+### Patch Changes
+
+- 7364fc4: fix branding config
+
 ## 1.1.2
 
 ### Patch Changes
